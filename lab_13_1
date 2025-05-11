@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+#include <locale>
+#ifdef _WIN32
+#include <windows.h>
+#endif
+using namespace std;
+
+// Клас "Комп'ютер"
+class Computer {
+private:
+    string processor; // Процесор
+    int ramSize; // Кількість оперативної пам'яті (ГБ)
+    int diskSize; // Розмір жорсткого диска (ГБ)
+    string graphicsCard; // графічна карта
+
+public:
+    // Конструктор
+    Computer(string processor, int ramSize, int diskSize, string graphicsCard)
+        : processor(processor), ramSize(ramSize), diskSize(diskSize), graphicsCard(graphicsCard) {
+    }
+
+    // Методи доступу (гетери)
+    string getProcessor() const { return processor; }
+    int getRamSize() const { return ramSize; }
+    int getDiskSize() const { return diskSize; }
+    string getGraphicsCard() const { return graphicsCard; }
+
+    // Методи доступу (сетері)
+    void setProcessor(string newProcessor) { processor = newProcessor; }
+    void setRamSize(int newRamSize) { ramSize = newRamSize; }
+    void setDiskSize(int newDiskSize) { diskSize = newDiskSize; }
+    void setGraphicsCard(string newGraphicsCard) { graphicsCard = newGraphicsCard; }
+
+    // Метод для виведення інформації про комп'ютер
+    void displayInfo() const {
+        cout << "Інформація про комп'ютер: " << endl;
+        cout << "____________________" << endl;
+        cout << "Процесор: " << processor << endl;
+        cout << "Оперативна пам'ять: " << ramSize << " ГБ" << endl;
+        cout << "Жорсткий диск: " << diskSize << " ГБ" << endl;
+        cout << "Графічна карта: " << graphicsCard << endl;
+        cout << "____________________" << endl;
+    }
+};
+int main() {
+    // Налаштування української мови
+    #ifdef _WIN32
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    setlocale(LC_ALL, "Ukrainian_Ukraine.1251");
+    #else
+    setlocale(LC_ALL, "uk_UA.UTF-8");
+    #endif
+    // Створення об'єкту класу "Комп'ютер"
+    Computer myPC("Intel Core i7-12700K", 32, 1000, "NVIDIA GeForce RTX 3060");
+    // Виведення інформації про комп'ютер
+    myPC.displayInfo();
+    // Очікування натисання клавіші перед закриттям консолі (тільки для Windows)
+    #ifdef _WIN32
+    #endif
+
+    return 0;
+}
